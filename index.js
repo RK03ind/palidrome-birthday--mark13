@@ -1,5 +1,7 @@
 document.querySelector("main button").addEventListener("click", () => {
   const date = document.querySelector("input[type='date']").value;
+
+  if (!date) return setMessage("Select some date in the input field above");
   const dateArray = date.split("-");
 
   const dateObj = {
@@ -30,11 +32,10 @@ const setMessage = (msg) => {
 const getAllDateFormats = (date) => {
   const ddmmyyyy = date.day + date.month + date.year;
   const mmddyyyy = date.month + date.day + date.year;
-  const mmddyy = date.month + date.day + date.year.slice(2);
-  const yyddmm = date.year.slice(2) + date.day + date.month;
+  const mmddyy = date.month + date.day + date.year.substring(2);
+  const yyddmm = date.year.substring(2) + date.day + date.month;
   const yyyymmdd = date.year + date.month + date.day;
-  const ddmmyy = date.day + date.month + date.year.slice(2);
-  console.log([ddmmyyyy, mmddyyyy, yyyymmdd, ddmmyy, mmddyy, yyddmm]);
+  const ddmmyy = date.day + date.month + date.year.substring(2);
   return [ddmmyyyy, mmddyyyy, yyyymmdd, ddmmyy, mmddyy, yyddmm];
 };
 
@@ -174,6 +175,7 @@ const getNearestPalindromeDate = (dateObj) => {
     }
   }
 
+  //checking which one is nearest
   if (dayCounter < dayCounter2) {
     setMessage(
       `You missed the nearest palindrome date ${nextDay.day}/${nextDay.month}/${nextDay.year} by ${dayCounter} days`
